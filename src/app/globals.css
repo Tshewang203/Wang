@@ -1,0 +1,105 @@
+/* src/app/globals.css */
+
+/* Basic Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Set default font and background */
+body {
+  font-family: 'Arial', sans-serif;
+  background-color: #f7f7f7;
+  color: #333;
+  line-height: 1.6;
+}
+
+/* Center the content */
+main {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Add padding to the form container */
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* Style the form inputs and selects */
+input,
+select,
+button {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 16px;
+}
+
+input:focus,
+select:focus {
+  border-color: #4a90e2;
+  outline: none;
+}
+
+/* Style error messages */
+p {
+  color: red;
+  font-size: 14px;
+}
+
+/* Style the submit button */
+button {
+  background-color: #4a90e2;
+  color: white;
+  cursor: pointer;
+  border: none;
+  font-size: 16px;
+  transition: background-color 0.3s;
+}
+
+button:hover {
+  background-color: #357ab7;
+}
+
+button:disabled {
+  background-color: #ddd;
+  cursor: not-allowed;
+}
+
+/* Style the success/error message */
+.server-message {
+  padding: 10px;
+  margin-top: 20px;
+  border-radius: 4px;
+  font-size: 16px;
+}
+
+.success {
+  background-color: #d4edda;
+  color: #155724;
+}
+
+.error {
+  background-color: #f8d7da;
+  color: #721c24;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  form {
+    gap: 15px;
+  }
+
+  input,
+  select,
+  button {
+    font-size: 14px;
+  }
+}
