@@ -21,11 +21,26 @@ const schema = yup.object().shape({
 });
 
 const RegistrationForm = () => {
-  const { register, handleSubmit, formState: { errors }, reset } = useForm({
+  const { register, handleSubmit, formState: { errors }, reset, setValue } = useForm({
     resolver: yupResolver(schema),
   });
 
   const [serverMessage, setServerMessage] = useState('');
+  const [selectedModules, setSelectedModules] = useState([]);
+
+  const handleCheckboxChange = (event) => {
+    const { value, checked } = event.target;
+    let updatedModules = [...selectedModules];
+
+    if (checked) {
+      updatedModules.push(value);
+    } else {
+      updatedModules = updatedModules.filter((module) => module !== value);
+    }
+
+    setSelectedModules(updatedModules);
+    setValue('modules', updatedModules); // Manually update react-hook-form
+  };
 
   const onSubmit = async (data) => {
     try {
@@ -72,13 +87,13 @@ const RegistrationForm = () => {
         <label>Programme</label>
         <select {...register('programme')}>
           <option value="BEIT">BE Information Technology </option>
-          <option value="BESWE">BE Software Engneering </option>
-          <option value="BECE">BE Civil</option>
-          <option value="BEEE">BE Electical Engineering</option>
-          <option value="BEECE">BE Electronics and Communication</option>
+          <option value="BESWE">BE Software Engineering </option>
+          <option value="BECE">BE Civil Engineering</option>
+          <option value="BEEE">BE Electrical Engineering</option>
+          <option value="BEECE">BE Electronics and Communication Engineering</option>
           <option value="BEA">BE Architecture </option>
           <option value="BEEG">BE Engineering Geology</option>
-          <option value="BECE">BE Instrumrntation and Control</option>
+          <option value="BECE">BE Instrumentation and Control Engineering</option>
         </select>
         {errors.programme && <p>{errors.programme.message}</p>}
       </div>
@@ -105,13 +120,53 @@ const RegistrationForm = () => {
 
       <div>
         <label>Modules</label>
-        <select multiple {...register('modules')} size="5">
-          <option value="MATH101">MATH101</option>
-          <option value="CPL102">CPL102</option>
-          <option value="NWC203">NWC203</option>
-          <option value="CTE204">CTE204</option>
-          <option value="DIS201">DIS201</option>
-        </select>
+        <div>
+          <label>
+            <input
+              type="checkbox"
+              value="MATH101"
+              onChange={handleCheckboxChange}
+              checked={selectedModules.includes('MATH101')}
+            />
+            MATH101
+          </label>
+          <label>
+            <input
+              type="checkbox"
+              value="CPL102"
+              onChange={handleCheckboxChange}
+              checked={selectedModules.includes('CPL102')}
+            />
+            CPL102
+          </label>
+          <label>
+            <input
+              type="checkbox"
+              value="NWC203"
+              onChange={handleCheckboxChange}
+              checked={selectedModules.includes('NWC203')}
+            />
+            NWC203
+          </label>
+          <label>
+            <input
+              type="checkbox"
+              value="CTE204"
+              onChange={handleCheckboxChange}
+              checked={selectedModules.includes('CTE204')}
+            />
+            CTE204
+          </label>
+          <label>
+            <input
+              type="checkbox"
+              value="DIS201"
+              onChange={handleCheckboxChange}
+              checked={selectedModules.includes('DIS201')}
+            />
+            DIS201
+          </label>
+        </div>
         {errors.modules && <p>{errors.modules.message}</p>}
       </div>
 
